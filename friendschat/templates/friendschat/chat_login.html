@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>Friends Chat</title>
+    <link href="{% static 'friendschat/images/chat-logo.png' %}" rel="icon">
+	  <script src="{% static 'friendschat/js/jquery-1.10.2.min.js' %}"></script>
+    <link href="{% static 'friendschat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'friendschat/css/chat-login.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container py-5 h-100">
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img src="{% static 'friendschat/images/chat-logo.png' %}" alt="Logo">
+      </div>
+      <div id="id_login_place" class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        {% load socialaccount %}
+      	<a href="{% provider_login_url 'google' %}" class="btn-google">
+      		<img src="{% static 'friendschat/images/icon-google.png' %}" alt="GOOGLE">
+      		&nbsp&nbspSign&nbspin&nbspwith&nbspGoogle&nbsp&nbsp
+      	</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
