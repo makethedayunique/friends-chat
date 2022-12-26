@@ -7,10 +7,20 @@ class ChatUser(models.Model):
     related_user = models.OneToOneField(User, on_delete=models.PROTECT, related_name="related_user")
     google_pic = models.CharField(max_length=300, null=True) # Will be reset everytime the user logs in
     friends = models.ManyToManyField("self", default=None)
+    email = models.EmailField(null=True, blank=True)
     is_online = models.BooleanField(default=True)
 
     def __str__(self):
         return 'ChatUser(id=' + str(self.id) +')'
+
+    def update(self, commit=False, **kwargs):
+        """Update a field value"""
+        for key, value in kwargs.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
+        if commit:
+            # If commit set to be true, save the object
+            self.save()
 
 class AuthorizedEmails(models.Model):
     """Authorized Emails to use thie app"""

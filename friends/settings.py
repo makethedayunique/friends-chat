@@ -152,7 +152,6 @@ SOCIALACCOUNT_LOGIN_ON_GET = True # Skip the confirmation page of login
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_AUTO_SIGN_UP = True
 SOCIALACCOUNT_ADAPTER = 'friends.adapter.CustomSocialAccountAdapter'
-ACCOUNT_SESSION_REMEMBER = False
 
 
 # Provider specific settings
