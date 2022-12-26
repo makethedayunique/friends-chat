@@ -12,7 +12,8 @@
     <link href="{% static 'friendschat/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'friendschat/css/chat_app.css' %}" rel="stylesheet">
 	<script src="{% static 'friendschat/js/bootstrap.bundle.min.js' %}"></script>
-    <link href="{% static 'friendschat/css/font-awesome.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'friendschat/css/fontawesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'friendschat/css/solid.css' %}" rel="stylesheet">
 </head>
 <body>
 <div class="container">
@@ -22,7 +23,7 @@
             <div id="plist" class="people-list">
                 <div class="my-profile clearfix">
                     {% if user.is_authenticated %}
-                    <img src="{% static 'friendschat/images/avatar7.png' %}" alt="avatar">
+                    <img src="{{ request.session.profile_pic }}" alt="avatar">
                     <div class="my-name">{{ user.first_name }} {{ user.last_name }}</div>
                     {% else %}
                     <img src="{% static 'friendschat/images/avatar7.png' %}" alt="avatar">
@@ -93,10 +94,10 @@
                             </div>
                         </div>
                         <div class="col-lg-6 hidden-sm text-right">
+                            <a href="{% url 'logout' %}" class="btn btn-outline-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
                             <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
                             <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
                             <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-                            <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
                         </div>
                     </div>
                 </div>
@@ -135,7 +136,7 @@
                 <div class="chat-message clearfix">
                     <div class="input-group mb-0">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-send"></i></span>
+                            <span class="input-group-text"><i class="fa-solid fa-paper-plane"></i></span>
                         </div>
                         <input type="text" class="form-control" placeholder="Enter text here...">                                    
                     </div>

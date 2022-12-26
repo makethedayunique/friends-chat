@@ -130,3 +130,6 @@ dmypy.json
 
 # Macbook
 .DS_Store
+
+# Self-defined
+initialization/

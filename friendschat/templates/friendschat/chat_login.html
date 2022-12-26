@@ -17,10 +17,15 @@
       </div>
       <div id="id_login_place" class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
         {% load socialaccount %}
-      	<a href="{% provider_login_url 'google' %}" class="btn-google">
+      	<a href="{% provider_login_url 'google' action='reauthenticate' %}" class="btn-google">
       		<img src="{% static 'friendschat/images/icon-google.png' %}" alt="GOOGLE">
       		&nbsp&nbspSign&nbspin&nbspwith&nbspGoogle&nbsp&nbsp
       	</a>
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+          {{ error }}
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>
