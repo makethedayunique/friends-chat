@@ -3,12 +3,11 @@
 <head>
     <meta charset="utf-8">
     {% load static %}
-    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
     <title>Friends Chat</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="{% static 'friendschat/js/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'friendschat/js/chat_app.js' %}"></script>
     <link href="{% static 'friendschat/images/chat-logo.png' %}" rel="icon">
-	<script src="{% static 'friendschat/js/jquery-1.10.2.min.js' %}"></script>
     <link href="{% static 'friendschat/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'friendschat/css/chat_app.css' %}" rel="stylesheet">
 	<script src="{% static 'friendschat/js/bootstrap.bundle.min.js' %}"></script>
@@ -19,6 +18,16 @@
 <div class="container">
 <div class="row clearfix">
     <div class="col-lg-12">
+
+    	<!-- Header of the website -->
+		<div id="id_site_header" class="d-flex align-items-center p-3 my-3 text-white-50 bg-palette1 rounded">
+        	<img class="mr-3" src="{% static 'friendschat/images/chat-logo.png' %}" alt="" width="48" height="48" style="border-radius: 10%;">
+        	<div class="lh-100">
+          		<h6 class="mb-0 text-white lh-100">Friends Chat</h6>
+          		<small>Chat with your friends</small>
+        	</div>
+      	</div>
+
         <div class="card chat-app">
             <div id="plist" class="people-list">
                 <div class="my-profile clearfix">
@@ -37,110 +46,81 @@
                     <input type="text" class="form-control" placeholder="Search...">
                 </div>
                 <ul class="list-unstyled chat-list mt-2 mb-0">
-                    <li class="clearfix">
-                        <img src="{% static 'friendschat/images/avatar1.png' %}" alt="avatar">
+                    {% for friend in friends %}
+                    <li class="clearfix" id="id_friend_tab_{{ friend.friend_id }}">
+                        <img src="{{ friend.friend_pic }}" alt="avatar">
                         <div class="about">
-                            <div class="name">Vincent Porter</div>
-                            <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>
-                        </div>
-                    </li>
-                    <li class="clearfix active">
-                        <img src="{% static 'friendschat/images/avatar2.png' %}" alt="avatar">
-                        <div class="about">
-                            <div class="name">Aiden Chavez</div>
+                            <div class="name">{{ friend.friend_name }}</div>
+                            {% if friend.online %}
                             <div class="status"> <i class="fa fa-circle online"></i> online </div>
+                            {% else %}
+                            <div class="status"> <i class="fa fa-circle offline"></i> offline </div>
+                            {% endif %}
                         </div>
                     </li>
-                    <li class="clearfix">
-                        <img src="{% static 'friendschat/images/avatar3.png' %}" alt="avatar">
-                        <div class="about">
-                            <div class="name">Mike Thomas</div>
-                            <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                        </div>
-                    </li>                                    
-                    <li class="clearfix">
-                        <img src="{% static 'friendschat/images/avatar7.png' %}" alt="avatar">
-                        <div class="about">
-                            <div class="name">Christian Kelly</div>
-                            <div class="status"> <i class="fa fa-circle offline"></i> left 10 hours ago </div>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <img src="{% static 'friendschat/images/avatar4.png' %}" alt="avatar">
-                        <div class="about">
-                            <div class="name">Monica Ward</div>
-                            <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                        </div>
-                    </li>
-                    <li class="clearfix">
-                        <img src="{% static 'friendschat/images/avatar5.png' %}" alt="avatar">
-                        <div class="about">
-                            <div class="name">Dean Henry</div>
-                            <div class="status"> <i class="fa fa-circle offline"></i> offline since Oct 28 </div>
-                        </div>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
-            <div class="chat">
-                <div class="chat-header clearfix">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                <img src="{% static 'friendschat/images/avatar2.png' %}" alt="avatar">
-                            </a>
-                            <div class="chat-about">
-                                <h6 class="m-b-0">Aiden Chavez</h6>
-                                <small>Last seen: 2 hours ago</small>
+            {% load tz %}
+            <div id="chat_rooms" class="chat">
+                {% for friend_chat in chat_list %}
+                <div class="chat_room" id="id_chat_room_with_{{ friend_chat.friend_id }}">
+                    <div class="chat-header clearfix">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a href="javascript:void(0);">
+                                    <img id="id_friend_img_{{ friend_chat.friend_id }}" src="{{ friend_chat.friend_pic }}" alt="avatar">
+                                </a>
+                                <div class="chat-about">
+                                    <h6 class="m-b-0">{{ friend_chat.friend_name }}</h6>
+                                    <small>{{ friend_chat.friend_desc }}</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 hidden-sm text-right">
+                                <a href="{% url 'logout' %}" class="btn btn-outline-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
+                                <a href="{% url 'request_page' %}" class="btn btn-outline-info"><i class="far fa-user-friends"></i></a>
                             </div>
                         </div>
-                        <div class="col-lg-6 hidden-sm text-right">
-                            <a href="{% url 'logout' %}" class="btn btn-outline-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
-                            <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-                            <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-                            <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
+                    </div>
+                    <div class="chat-history" id="id_chat_history_with_{{ friend_chat.friend_id }}">
+                        <ul class="m-b-0" id="id_chat_ul_{{ friend_chat.friend_id }}">
+                            {% for message in friend_chat.messages %}
+                            <li class="clearfix" id="id_message_{{ message.message_id }}">
+                                {% if message.message_my_sent %}
+                                <div class="message-data text-right">
+                                    <span class="message-data-time">{{ message.message_datetime|date:'n/j/Y g:i A'}}</span>
+                                    <img src="{{ message.message_sent_pic }}" alt="avatar">
+                                </div>
+                                <div class="message other-message float-right"> {{ message.message_content }} </div>
+                                {% else %}
+                                <div class="message-data">
+                                    <span class="message-data-time">{{ message.message_datetime|date:'n/j/Y g:i A'}}</span>
+                                    <img src="{{ message.message_sent_pic }}" alt="avatar">
+                                </div>
+                                <div class="message my-message"> {{ message.message_content }} </div>
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="chat-message clearfix">
+                        <div class="input-group mb-0">
+                            <div class="input-group-prepend">
+                                <span id="id_chat_button_with_{{ friend_chat.friend_id }}" class="input-group-text"><i class="fa-solid fa-paper-plane"></i></span>
+                            </div>
+                            <input id="id_chat_inputbox_with_{{ friend_chat.friend_id }}" type="text" class="form-control" placeholder="Enter text here (can't be empty)...">                                    
                         </div>
                     </div>
                 </div>
-                <div class="chat-history">
-                    <ul class="m-b-0">
-                        <li class="clearfix">
-                            <div class="message-data text-right">
-                                <span class="message-data-time">10:10 AM, Today</span>
-                                <img src="{% static 'friendschat/images/avatar7.png' %}" alt="avatar">
-                            </div>
-                            <div class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div>
-                        </li>
-                        <li class="clearfix">
-                            <div class="message-data">
-                                <img src="{% static 'friendschat/images/avatar2.png' %}" alt="avatar">
-                                <span class="message-data-time">10:12 AM, Today</span>
-                            </div>
-                            <div class="message my-message">Are we meeting today?</div>                                    
-                        </li>                               
-                        <li class="clearfix">
-                            <div class="message-data">
-                                <img src="{% static 'friendschat/images/avatar2.png' %}" alt="avatar">
-                                <span class="message-data-time">10:15 AM, Today</span>
-                            </div>
-                            <div class="message my-message">Project has been already finished and I have results to show you.</div>
-                        </li>
-                        <li class="clearfix">
-                            <div class="message-data">
-                                <img src="{% static 'friendschat/images/avatar2.png' %}" alt="avatar">
-                                <span class="message-data-time">10:15 AM, Today</span>
-                            </div>
-                            <div class="message my-message">Project has been already finished and I have results to show you.</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="chat-message clearfix">
-                    <div class="input-group mb-0">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa-solid fa-paper-plane"></i></span>
-                        </div>
-                        <input type="text" class="form-control" placeholder="Enter text here...">                                    
-                    </div>
-                </div>
+                {% endfor %}
+                <div class="chat_room">
+	                <div class="chat-history">
+                        <a href="{% url 'request_page' %}" class="btn btn-outline-info btn-lg btn-block" role="button">
+                            <i class="far fa-user-friends"></i>  Find a new Friend</a>
+                        <a href="{% url 'logout' %}" class="btn btn-outline-warning btn-lg btn-block" role="button">
+                        <i class="fa-solid fa-right-from-bracket"></i>  Logout</a>
+	                </div>
+	            </div>
             </div>
         </div>
     </div>

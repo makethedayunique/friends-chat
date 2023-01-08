@@ -23,4 +23,8 @@ urlpatterns = [
     path('', views.chat_board, name='chatboard'),
     path('login', views.chat_login, name='login'),
     path('logout', views.chat_logout, name='logout'),
+    path('request_page', views.get_request_page, name='request_page'),
+    path('search_user', views.search_for, name='search_user'),
+    path('send_adding_friend', views.send_adding_friend, name='send_adding_friend'),
+    path('accept_friend', views.accept_friend, name='accept_friend'),
 ]

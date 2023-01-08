@@ -1,4 +1,5 @@
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
+from allauth.account.adapter import DefaultAccountAdapter
 from friendschat.models import AuthorizedEmails
 
 from allauth.exceptions import ImmediateHttpResponse
@@ -29,4 +30,11 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
             raise ImmediateHttpResponse(render(request, "friendschat/chat_login.html", 
                 {"error": "You are not authorized to log in"}))
         return authenticated
+
+class CustomAccountAdapter(DefaultAccountAdapter):
+    """Inherit from default adapter"""
+    def is_open_for_signup(self, request):
+        """Only available to login with google account"""
+        raise ImmediateHttpResponse(render(request, "friendschat/chat_login.html",
+            {"error": "You must log in with a google account"}))
         

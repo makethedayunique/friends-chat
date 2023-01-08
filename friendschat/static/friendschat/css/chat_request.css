@@ -1,0 +1,19 @@
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
+.text-white-50 { color: rgba(255, 255, 255, .5); }
+
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.lh-100 { line-height: 1; }
+.lh-125 { line-height: 1.25; }
+.lh-150 { line-height: 1.5; }
+
+.bg-palette1 { background-image: linear-gradient(to right, #d9ed92, #34a0a4, #184e77);}
+.bg-palette2 { background-image: linear-gradient(to right, #99e2b4, #469d89, #036666);}
+.bg-palette3 { background-image: linear-gradient(to right, #fec5bb, #e8e8e4, #fec89a);}
+.bg-palette4 { background-image: linear-gradient(to right, #f72585, #b5179e, #7209b7, #560bad, #480ca8, #3a0ca3, #3f37c9, #4361ee,#4895ef, #4cc9f0);}

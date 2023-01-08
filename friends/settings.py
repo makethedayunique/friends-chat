@@ -28,12 +28,13 @@ SECRET_KEY = os.environ.get("secret")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,7 +87,21 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 WSGI_APPLICATION = 'friends.wsgi.application'
+ASGI_APPLICATION = 'friends.asgi.application'
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(os.environ.get("channel_layer_redis_host"), 
+                        int(os.environ.get("channel_layer_redis_port")))],
+        }
+    }
+}
+
+REDIS_HOST = os.environ.get("user_redis_host")
+REDIS_PORT = int(os.environ.get("user_redis_port"))
+REDIS_PASSWORD = os.environ.get("user_redis_password")
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -152,6 +167,7 @@ SOCIALACCOUNT_LOGIN_ON_GET = True # Skip the confirmation page of login
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_AUTO_SIGN_UP = True
 SOCIALACCOUNT_ADAPTER = 'friends.adapter.CustomSocialAccountAdapter'
+ACCOUNT_ADAPTER = 'friends.adapter.CustomAccountAdapter'
 
 
 # Provider specific settings

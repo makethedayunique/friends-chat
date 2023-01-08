@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        {% load static %}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Friends Chat</title>
+        <link href="{% static 'friendschat/images/chat-logo.png' %}" rel="icon">
+        <link href="{% static 'friendschat/css/bootstrap.min.css' %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="d-flex align-items-center justify-content-center vh-100">
+            <div class="text-center">
+                <img src="{% static 'friendschat/images/chat-logo.png' %}" style="width:50%">
+                <h1 class="display-1 fw-bold">{{ error_code }}</h1>
+                <p class="fs-3"> <span class="text-danger">Opps!</span> Something went wrong.</p>
+                <p class="lead">
+                    {{ error_msg }}
+                  </p>
+                <a href="{% url '' %}" class="btn btn-primary">Go Home</a>
+            </div>
+        </div>
+    </body>
+
+
+</html>

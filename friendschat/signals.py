@@ -33,13 +33,13 @@ def post_login(sender, request, user, **kwargs):
     # Check whether there is chat user in the database
     google_info = user.socialaccount_set.filter(provider="google")[0].extra_data
     chat_user = _create_and_get_chatuser(request, user, google_info)
-    chat_user.update(google_pic=google_info["picture"]) # Update the picture
-    chat_user.update(is_online=True) # Update the status
+    chat_user.update(commit=True, google_pic=google_info["picture"]) # Update the picture
+    chat_user.update(commit=True, is_online=True)
 
 @receiver(user_logged_out)
 def post_logout(sender, request, user, **kwargs):
     """Handle when a user log out"""
     google_info = user.socialaccount_set.filter(provider="google")[0].extra_data
     chat_user = _create_and_get_chatuser(request, user, google_info)
-    chat_user.update(is_online=False) # Update the status
+    chat_user.update(commit=True, is_online=False) # Update the status
 

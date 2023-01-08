@@ -91,6 +91,10 @@ body{
     font-size: 13px
 }
 
+.chat_room {
+	display: None;
+}
+
 .chat .chat-header {
     padding: 15px 20px;
     border-bottom: 2px solid #f4f7f6
@@ -131,10 +135,11 @@ body{
 
 .chat .chat-history .message-data img {
     border-radius: 40px;
-    width: 40px
+    width: 25px
 }
 
 .chat .chat-history .message-data-time {
+    font-size: 10px;
     color: #434651;
     padding-left: 6px
 }
@@ -142,8 +147,8 @@ body{
 .chat .chat-history .message {
     color: #444;
     padding: 18px 20px;
-    line-height: 26px;
-    font-size: 16px;
+    line-height: 20px;
+    font-size: 15px;
     border-radius: 7px;
     display: inline-block;
     position: relative
@@ -228,6 +233,28 @@ body{
     height: 0
 }
 
+/* Initial height settings */
+.chat-app .chat-list {
+    height: 600px;
+    overflow-x: auto;
+}
+.chat-app .chat-history {
+    height: 550px;
+    overflow-x: auto
+}
+
+/* Header settings*/
+.text-white-50 { color: rgba(255, 255, 255, .5); }
+
+.bg-palette1 { background-image: linear-gradient(to right, #d9ed92, #34a0a4, #184e77);}
+.bg-palette2 { background-image: linear-gradient(to right, #99e2b4, #469d89, #036666);}
+.bg-palette3 { background-image: linear-gradient(to right, #fec5bb, #e8e8e4, #fec89a);}
+.bg-palette4 { background-image: linear-gradient(to right, #f72585, #b5179e, #7209b7, #560bad, #480ca8, #3a0ca3, #3f37c9, #4361ee,#4895ef, #4cc9f0);}
+
+.lh-100 { line-height: 1; }
+.lh-125 { line-height: 1.25; }
+.lh-150 { line-height: 1.5; }
+
 @media only screen and (max-width: 767px) {
     .chat-app .people-list {
         height: 465px;
@@ -254,11 +281,11 @@ body{
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
     .chat-app .chat-list {
-        height: 650px;
+        height: 600px;
         overflow-x: auto
     }
     .chat-app .chat-history {
-        height: 600px;
+        height: 550px;
         overflow-x: auto
     }
 }
