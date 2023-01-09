@@ -86,7 +86,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def disconnect(self, code):
         # Remove this connection from the redis
-        sync_to_async(self.redis_cli.srem)(self.redis_key, self.channel_name)
+        await sync_to_async(self.redis_cli.srem)(self.redis_key, self.channel_name)
 
     async def chat_onetoone(self, event):
         msg_id = int(event["message_id"])

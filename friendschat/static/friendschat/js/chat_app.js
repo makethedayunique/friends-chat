@@ -11,7 +11,7 @@ $(function(){
     $("span[id^=id_chat_button_with_]").click(function(){
         // Send message button clicked
         let inputbox_group = $("span[id^=id_chat_button_with_]");
-        let inputbox = inputbox_group.eq(inputbox_group.index($(this)));
+        let inputbox = $("input[id^=id_chat_inputbox_with_]").eq(inputbox_group.index($(this)));
         if (inputbox.val() == '') {
             return;
         }
@@ -92,3 +92,19 @@ window.addEventListener("unload", function() {
         chatSocket.close();
     }
 });
+
+
+function show_people_list() {
+    $("#plist").animate({left: "0px"}, 500);
+}
+
+function hide_people_list() {
+    $("#plist").animate({left: "-400px"}, 500);
+}
+
+$(window).on("resize", function(){
+    // Function to put the people list to the right position
+    if ($(window).width() > 767) {
+        $(".people-list").css("left", 0);
+    }
+})

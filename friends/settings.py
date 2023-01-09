@@ -163,6 +163,7 @@ LOGIN_URL = '/login'
 # Default URL to redirect to after a user logs in
 LOGIN_REDIRECT_URL = '/'
 
+ACCOUNT_SESSION_REMEMBER = True # Always remember the user
 SOCIALACCOUNT_LOGIN_ON_GET = True # Skip the confirmation page of login
 SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_AUTO_SIGN_UP = True

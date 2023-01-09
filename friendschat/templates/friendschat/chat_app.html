@@ -34,6 +34,7 @@
                     {% if user.is_authenticated %}
                     <img src="{{ request.session.profile_pic }}" alt="avatar">
                     <div class="my-name">{{ user.first_name }} {{ user.last_name }}</div>
+                    <a onclick="hide_people_list()" class="btn btn-outline-primary float-right small-display-hiden-btn"><i class="fa-solid fa-list"></i></a>
                     {% else %}
                     <img src="{% static 'friendschat/images/avatar7.png' %}" alt="avatar">
                     <div class="my-name">Not logged In</div>
@@ -77,6 +78,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 hidden-sm text-right">
+                                <a onclick="show_people_list()" class="btn btn-outline-primary small-display-hiden-btn"><i class="fa-solid fa-list"></i></a>
                                 <a href="{% url 'logout' %}" class="btn btn-outline-danger"><i class="fa-solid fa-right-from-bracket"></i></a>
                                 <a href="{% url 'request_page' %}" class="btn btn-outline-info"><i class="far fa-user-friends"></i></a>
                             </div>

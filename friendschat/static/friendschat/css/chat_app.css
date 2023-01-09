@@ -255,14 +255,22 @@ body{
 .lh-125 { line-height: 1.25; }
 .lh-150 { line-height: 1.5; }
 
+/* Some small display settings */
+.small-display-hiden-btn {
+    display: none;
+}
+
 @media only screen and (max-width: 767px) {
+    .small-display-hiden-btn {
+        display: inline-block;
+    }
+
     .chat-app .people-list {
         height: 465px;
         width: 100%;
         overflow-x: auto;
         background: #fff;
         left: -400px;
-        display: none
     }
     .chat-app .people-list.open {
         left: 0
